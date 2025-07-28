@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useAuth } from '@/hooks/useAuth';
 import { LogOut, User, Bell } from 'lucide-react';
 import {
@@ -30,9 +31,12 @@ export const Header = () => {
   return (
     <header className="bg-card border-b border-border px-6 py-4">
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-foreground">HRMS Dashboard</h1>
-          <p className="text-sm text-muted-foreground">Welcome back, {user?.fullName}</p>
+        <div className="flex items-center gap-4">
+          <SidebarTrigger />
+          <div>
+            <h1 className="text-xl font-bold text-foreground">Dashboard</h1>
+            <p className="text-sm text-muted-foreground">Welcome back, {user?.fullName}</p>
+          </div>
         </div>
         
         <div className="flex items-center gap-4">
