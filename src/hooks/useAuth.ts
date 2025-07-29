@@ -4,6 +4,7 @@ import mockUsers from '@/data/mockUsers.json';
 interface User {
   email: string;
   fullName: string;
+  role: 'admin' | 'manager' | 'employee';
 }
 
 export const useAuth = () => {
@@ -32,7 +33,11 @@ export const useAuth = () => {
     );
 
     if (foundUser) {
-      const userData = { email: foundUser.email, fullName: foundUser.fullName };
+      const userData = { 
+        email: foundUser.email, 
+        fullName: foundUser.fullName,
+        role: foundUser.role as 'admin' | 'manager' | 'employee'
+      };
       localStorage.setItem('hrms_token', 'mock_token_' + Date.now());
       localStorage.setItem('hrms_user', JSON.stringify(userData));
       setUser(userData);

@@ -2,11 +2,19 @@
   {
     "email": "admin@example.com",
     "password": "admin123",
-    "fullName": "Nil Yeager"
+    "fullName": "Nil Yeager",
+    "role": "admin"
   },
   {
-    "email": "user@hrms.com",
-    "password": "user123",
-    "fullName": "John Doe"
+    "email": "manager@hrms.com", 
+    "password": "manager123",
+    "fullName": "Sarah Johnson",
+    "role": "manager"
+  },
+  {
+    "email": "employee@hrms.com",
+    "password": "employee123", 
+    "fullName": "John Doe",
+    "role": "employee"
   }
 ]

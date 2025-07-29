@@ -70,9 +70,9 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md bg-card border-border">
+      <Card className="w-full max-w-md bg-card border-border animate-fade-in">
         <CardHeader className="text-center space-y-4">
-          <div className="mx-auto w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
+          <div className="mx-auto w-12 h-12 bg-primary rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110">
             <Building2 className="h-6 w-6 text-primary-foreground" />
           </div>
           <CardTitle className="text-2xl font-bold text-foreground">
@@ -88,7 +88,7 @@ const SignUp = () => {
                 id="fullName"
                 type="text"
                 placeholder="Enter your full name"
-                className="bg-input border-border text-foreground"
+                className="bg-input border-border text-foreground transition-all duration-200 focus:scale-[1.02] hover:shadow-md"
                 {...register('fullName')}
               />
               {errors.fullName && (
@@ -102,7 +102,7 @@ const SignUp = () => {
                 id="email"
                 type="email"
                 placeholder="Enter your email"
-                className="bg-input border-border text-foreground"
+                className="bg-input border-border text-foreground transition-all duration-200 focus:scale-[1.02] hover:shadow-md"
                 {...register('email')}
               />
               {errors.email && (
@@ -118,7 +118,7 @@ const SignUp = () => {
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Enter your password"
-                  className="bg-input border-border text-foreground pr-10"
+                  className="bg-input border-border text-foreground pr-10 transition-all duration-200 focus:scale-[1.02] hover:shadow-md"
                   {...register('password')}
                 />
                 <Button
@@ -147,7 +147,7 @@ const SignUp = () => {
                   id="confirmPassword"
                   type={showConfirmPassword ? 'text' : 'password'}
                   placeholder="Confirm your password"
-                  className="bg-input border-border text-foreground pr-10"
+                  className="bg-input border-border text-foreground pr-10 transition-all duration-200 focus:scale-[1.02] hover:shadow-md"
                   {...register('confirmPassword')}
                 />
                 <Button
@@ -171,7 +171,7 @@ const SignUp = () => {
 
             <Button
               type="submit"
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 hover:scale-[1.02] hover:shadow-lg"
               disabled={isLoading}
             >
               {isLoading ? 'Creating Account...' : 'Create Account'}
