@@ -6,13 +6,10 @@ import { ClockInOutCard } from '@/components/widgets/ClockInOutCard';
 import { BirthdayCarousel } from '@/components/widgets/BirthdayCarousel';
 import { HolidaysSection } from '@/components/widgets/HolidaysSection';
 import { AttendanceOverview } from '@/components/widgets/AttendanceOverview';
-import { AttendanceFilterView } from '@/components/widgets/AttendanceFilterView';
-import { WorkingFormatChart } from '@/components/widgets/WorkingFormatChart';
-import { ProjectEmploymentChart } from '@/components/widgets/ProjectEmploymentChart';
-import { StaffTurnoverChart } from '@/components/widgets/StaffTurnoverChart';
-import { ApplicationsProgress } from '@/components/widgets/ApplicationsProgress';
-import { RecruitmentTable } from '@/components/widgets/RecruitmentTable';
-import { Users, UserPlus, TrendingUp, Heart } from 'lucide-react';
+import { PrivilegesSickLeave } from '@/components/widgets/PrivilegesSickLeave';
+import { MyProjects } from '@/components/widgets/MyProjects';
+import { MonthlyWorkingHours } from '@/components/widgets/MonthlyWorkingHours';
+import { Users, UserPlus } from 'lucide-react';
 
 const Dashboard = () => {
   return (
@@ -24,9 +21,10 @@ const Dashboard = () => {
           <Header />
           
           <main className="flex-1 p-6 overflow-auto">
-            {/* Metrics Row - Including Clock In/Out */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-6">
+            {/* Metrics Row - Including Clock In/Out and Monthly Hours */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
               <ClockInOutCard />
+              <MonthlyWorkingHours />
               <MetricCard
                 title="Total Employees"
                 value="1,234"
@@ -35,24 +33,10 @@ const Dashboard = () => {
                 changeType="positive"
               />
               <MetricCard
-                title="New Employees"
-                value="23"
-                icon={TrendingUp}
-                change="+8% from last month"
-                changeType="positive"
-              />
-              <MetricCard
                 title="Number of Leaves"
                 value="45"
                 icon={UserPlus}
                 change="+5% from last month"
-                changeType="positive"
-              />
-              <MetricCard
-                title="Happiness Rate"
-                value="94%"
-                icon={Heart}
-                change="+2% from last month"
                 changeType="positive"
               />
             </div>
@@ -63,24 +47,14 @@ const Dashboard = () => {
               <HolidaysSection />
             </div>
 
-            {/* Attendance Overview */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+            {/* Attendance and Privileges */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
               <AttendanceOverview />
-              <AttendanceFilterView />
+              <PrivilegesSickLeave />
             </div>
 
-            {/* Charts Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-6">
-              <WorkingFormatChart />
-              <ProjectEmploymentChart />
-              <StaffTurnoverChart />
-            </div>
-
-            {/* Applications and Recruitment */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <ApplicationsProgress />
-              <RecruitmentTable />
-            </div>
+            {/* My Projects */}
+            <MyProjects />
           </main>
         </div>
       </div>

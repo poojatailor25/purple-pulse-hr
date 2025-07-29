@@ -16,7 +16,6 @@ const signUpSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
   confirmPassword: z.string(),
-  mobile: z.string().regex(/^\d{10}$/, 'Mobile number must be 10 digits'),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
@@ -43,7 +42,6 @@ const SignUp = () => {
         fullName: data.fullName,
         email: data.email,
         password: data.password,
-        mobile: data.mobile,
       });
       
       if (success) {
@@ -112,19 +110,6 @@ const SignUp = () => {
               )}
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="mobile" className="text-foreground">Mobile Number</Label>
-              <Input
-                id="mobile"
-                type="tel"
-                placeholder="Enter 10-digit mobile number"
-                className="bg-input border-border text-foreground"
-                {...register('mobile')}
-              />
-              {errors.mobile && (
-                <p className="text-sm text-destructive">{errors.mobile.message}</p>
-              )}
-            </div>
 
             <div className="space-y-2">
               <Label htmlFor="password" className="text-foreground">Password</Label>

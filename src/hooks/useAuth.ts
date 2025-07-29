@@ -45,7 +45,6 @@ export const useAuth = () => {
     fullName: string;
     email: string;
     password: string;
-    mobile: string;
   }): Promise<boolean> => {
     // In a real app, this would make an API call
     // For now, we'll just simulate success

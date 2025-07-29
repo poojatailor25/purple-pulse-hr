@@ -15,8 +15,6 @@ const COLORS = {
 export const AttendanceOverview = () => {
   const data = [
     { name: 'Present', value: attendanceData.present, color: COLORS.present },
-    { name: 'Late', value: attendanceData.late, color: COLORS.late },
-    { name: 'Permission', value: attendanceData.permission, color: COLORS.permission },
     { name: 'Absent', value: attendanceData.absent, color: COLORS.absent },
   ];
 
@@ -78,33 +76,6 @@ export const AttendanceOverview = () => {
               ))}
             </div>
 
-            {/* Absentees */}
-            <div className="pt-4 border-t border-border">
-              <p className="text-sm font-medium text-foreground mb-3">Today's Absentees</p>
-              <div className="flex items-center gap-2 mb-3">
-                {attendanceData.absentees.slice(0, 5).map((person, index) => (
-                  <Avatar key={index} className="h-8 w-8">
-                    <AvatarImage 
-                      src={`https://images.unsplash.com/${person.image}?w=32&h=32&fit=crop&crop=face`} 
-                      alt={person.name} 
-                    />
-                    <AvatarFallback className="bg-destructive/20 text-destructive text-xs">
-                      {getInitials(person.name)}
-                    </AvatarFallback>
-                  </Avatar>
-                ))}
-                {attendanceData.absentees.length > 5 && (
-                  <div className="h-8 w-8 bg-muted rounded-full flex items-center justify-center">
-                    <span className="text-xs text-muted-foreground">
-                      +{attendanceData.absentees.length - 5}
-                    </span>
-                  </div>
-                )}
-              </div>
-              <Button variant="outline" size="sm" className="w-full">
-                View Details
-              </Button>
-            </div>
           </div>
         </div>
       </CardContent>
