@@ -6,7 +6,8 @@ import {
   Clock, 
   BarChart3, 
   Settings,
-  LogOut
+  LogOut,
+  Menu
 } from "lucide-react"
 import {
   Sidebar,
@@ -18,6 +19,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
+  SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { useAuth } from "@/hooks/useAuth"
 
@@ -42,27 +44,28 @@ export function AppSidebar() {
 
   const isActive = (path: string) => currentPath === path
   const getNavCls = ({ isActive }: { isActive: boolean }) =>
-    isActive ? "bg-primary/20 text-primary font-medium" : "hover:bg-muted/50"
+    isActive ? "bg-primary/20 text-primary font-medium" : "hover:bg-accent/50 text-accent-foreground"
 
   return (
     <Sidebar
-      className={collapsed ? "w-14" : "w-60"}
+      className={`${collapsed ? "w-14" : "w-60"} bg-sidebar border-sidebar-border`}
       collapsible="icon"
     >
-      <SidebarContent>
-        <div className="p-4">
-          <h2 className={`font-bold text-lg text-primary ${collapsed ? 'hidden' : ''}`}>
+      <SidebarContent className="bg-sidebar">
+        <div className="p-4 flex items-center justify-between">
+          <h2 className={`font-bold text-lg text-sidebar-foreground ${collapsed ? 'hidden' : ''}`}>
             HRMS Portal
           </h2>
+          {!collapsed && <SidebarTrigger className="ml-auto" />}
           {collapsed && (
             <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
-              <span className="text-white font-bold text-sm">H</span>
+              <span className="text-primary-foreground font-bold text-sm">H</span>
             </div>
           )}
         </div>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Main Menu</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-sidebar-foreground/70">Main Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {mainItems.map((item) => (
@@ -80,7 +83,7 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>System</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-sidebar-foreground/70">System</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {settingsItems.map((item) => (
@@ -95,7 +98,7 @@ export function AppSidebar() {
               ))}
               
               <SidebarMenuItem>
-                <SidebarMenuButton onClick={logout} className="hover:bg-destructive/20 hover:text-destructive">
+                <SidebarMenuButton onClick={logout} className="hover:bg-destructive/20 hover:text-destructive text-sidebar-foreground">
                   <LogOut className="mr-2 h-4 w-4" />
                   {!collapsed && <span>Logout</span>}
                 </SidebarMenuButton>

@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { AppSidebar } from '@/components/layout/AppSidebar';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { MetricCard } from '@/components/widgets/MetricCard';
@@ -11,15 +12,37 @@ import { MonthlyWorkingHours } from '@/components/widgets/MonthlyWorkingHours';
 import { Users, UserPlus } from 'lucide-react';
 
 const Dashboard = () => {
+  const location = useLocation();
+  
+  const getPageTitle = () => {
+    const path = location.pathname;
+    switch (path) {
+      case '/dashboard':
+        return 'Dashboard';
+      case '/employees':
+        return 'Employees';
+      case '/calendar':
+        return 'Calendar';
+      case '/attendance':
+        return 'Attendance';
+      case '/reports':
+        return 'Reports';
+      case '/settings':
+        return 'Settings';
+      default:
+        return 'Dashboard';
+    }
+  };
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
         <AppSidebar />
         
         <div className="flex-1 flex flex-col">
-          {/* Header with only sidebar trigger */}
-          <header className="h-12 flex items-center border-b border-border bg-card px-4">
-            <SidebarTrigger />
+          {/* Header with page title */}
+          <header className="h-16 flex items-center justify-between border-b border-border bg-card px-6">
+            <h1 className="text-2xl font-semibold text-foreground">{getPageTitle()}</h1>
           </header>
           
           <main className="flex-1 p-6 overflow-auto">

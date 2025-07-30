@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Building2 } from 'lucide-react';
+import { Building2, ArrowLeft } from 'lucide-react';
 
 const onboardingSchema = z.object({
   companyName: z.string().min(2, 'Company name is required'),
@@ -27,15 +27,30 @@ type OnboardingFormData = z.infer<typeof onboardingSchema>;
 interface OnboardingDialogProps {
   open: boolean;
   onComplete: () => void;
+  onBack?: () => void;
 }
 
-export const OnboardingDialog = ({ open, onComplete }: OnboardingDialogProps) => {
+export const OnboardingDialog = ({ open, onComplete, onBack }: OnboardingDialogProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const { register, handleSubmit, formState: { errors } } = useForm<OnboardingFormData>({
+  const { register, handleSubmit, formState: { errors }, trigger } = useForm<OnboardingFormData>({
     resolver: zodResolver(onboardingSchema),
   });
+
+  const validateField = async (fieldName: keyof OnboardingFormData) => {
+    const isValid = await trigger(fieldName);
+    if (!isValid) {
+      const error = errors[fieldName];
+      if (error) {
+        toast({
+          title: "Validation Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
+    }
+  };
 
   const onSubmit = async (data: OnboardingFormData) => {
     setIsLoading(true);
@@ -67,6 +82,20 @@ export const OnboardingDialog = ({ open, onComplete }: OnboardingDialogProps) =>
     <Dialog open={open} onOpenChange={() => {}}>
       <DialogContent className="sm:max-w-md animate-scale-in">
         <DialogHeader className="text-center space-y-4">
+          <div className="flex items-center justify-between w-full">
+            {onBack && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onBack}
+                className="hover:bg-muted transition-all duration-200"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back
+              </Button>
+            )}
+            <div className="flex-1" />
+          </div>
           <div className="mx-auto w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
             <Building2 className="h-6 w-6 text-primary-foreground" />
           </div>
@@ -84,12 +113,10 @@ export const OnboardingDialog = ({ open, onComplete }: OnboardingDialogProps) =>
             <Input
               id="companyName"
               placeholder="Enter company name"
-              className="transition-all duration-200 focus:scale-[1.02]"
+              className="transition-all duration-200 focus:scale-[1.02] hover:border-primary/50 hover:shadow-md"
               {...register('companyName')}
+              onBlur={() => validateField('companyName')}
             />
-            {errors.companyName && (
-              <p className="text-sm text-destructive">{errors.companyName.message}</p>
-            )}
           </div>
 
           <div className="space-y-2">
@@ -97,12 +124,10 @@ export const OnboardingDialog = ({ open, onComplete }: OnboardingDialogProps) =>
             <Input
               id="address"
               placeholder="Enter company address"
-              className="transition-all duration-200 focus:scale-[1.02]"
+              className="transition-all duration-200 focus:scale-[1.02] hover:border-primary/50 hover:shadow-md"
               {...register('address')}
+              onBlur={() => validateField('address')}
             />
-            {errors.address && (
-              <p className="text-sm text-destructive">{errors.address.message}</p>
-            )}
           </div>
 
           <div className="space-y-2">
@@ -110,12 +135,10 @@ export const OnboardingDialog = ({ open, onComplete }: OnboardingDialogProps) =>
             <Input
               id="city"
               placeholder="Enter city"
-              className="transition-all duration-200 focus:scale-[1.02]"
+              className="transition-all duration-200 focus:scale-[1.02] hover:border-primary/50 hover:shadow-md"
               {...register('city')}
+              onBlur={() => validateField('city')}
             />
-            {errors.city && (
-              <p className="text-sm text-destructive">{errors.city.message}</p>
-            )}
           </div>
 
           <div className="space-y-2">
@@ -124,12 +147,10 @@ export const OnboardingDialog = ({ open, onComplete }: OnboardingDialogProps) =>
               id="contactEmail"
               type="email"
               placeholder="Enter contact email"
-              className="transition-all duration-200 focus:scale-[1.02]"
+              className="transition-all duration-200 focus:scale-[1.02] hover:border-primary/50 hover:shadow-md"
               {...register('contactEmail')}
+              onBlur={() => validateField('contactEmail')}
             />
-            {errors.contactEmail && (
-              <p className="text-sm text-destructive">{errors.contactEmail.message}</p>
-            )}
           </div>
 
           <div className="space-y-2">
@@ -137,12 +158,10 @@ export const OnboardingDialog = ({ open, onComplete }: OnboardingDialogProps) =>
             <Input
               id="contactPhone"
               placeholder="Enter contact phone"
-              className="transition-all duration-200 focus:scale-[1.02]"
+              className="transition-all duration-200 focus:scale-[1.02] hover:border-primary/50 hover:shadow-md"
               {...register('contactPhone')}
+              onBlur={() => validateField('contactPhone')}
             />
-            {errors.contactPhone && (
-              <p className="text-sm text-destructive">{errors.contactPhone.message}</p>
-            )}
           </div>
 
           <Button
