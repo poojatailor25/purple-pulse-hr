@@ -58,6 +58,10 @@ export default {
 				success: 'hsl(var(--success))',
 				warning: 'hsl(var(--warning))',
 				info: 'hsl(var(--info))',
+				'toast-success': 'hsl(var(--toast-success))',
+				'toast-success-foreground': 'hsl(var(--toast-success-foreground))',
+				'toast-error': 'hsl(var(--toast-error))',
+				'toast-error-foreground': 'hsl(var(--toast-error-foreground))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',

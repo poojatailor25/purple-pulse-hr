@@ -12,6 +12,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { OnboardingDialog } from '@/components/OnboardingDialog';
 import { ForgotPasswordDialog } from '@/components/ForgotPasswordDialog';
 import { Eye, EyeOff, Building2 } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -28,6 +29,7 @@ const Login = () => {
   const { login, user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const scrollRef = useScrollAnimation();
 
   useEffect(() => {
     if (user) {
@@ -98,8 +100,8 @@ const Login = () => {
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-background p-4">
-        <Card className="w-full max-w-md bg-card border-border animate-fade-in">
+      <div ref={scrollRef} className="min-h-screen flex items-center justify-center bg-background p-4">
+        <Card className="w-full max-w-md bg-card border-border animate-fade-in hover-lift">
           <CardHeader className="text-center space-y-4">
             <div className="mx-auto w-12 h-12 bg-primary rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110">
               <Building2 className="h-6 w-6 text-primary-foreground" />
@@ -117,7 +119,7 @@ const Login = () => {
                 id="email"
                 type="email"
                 placeholder="Enter your email"
-                className="bg-input border-border text-foreground transition-all duration-200 focus:scale-[1.02] hover:shadow-md"
+                className="bg-input border-border text-foreground input-hover hover-lift animate-on-scroll"
                 {...register('email')}
               />
               {errors.email && (
@@ -141,7 +143,7 @@ const Login = () => {
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Enter your password"
-                  className="bg-input border-border text-foreground pr-10 transition-all duration-200 focus:scale-[1.02] hover:shadow-md"
+                  className="bg-input border-border text-foreground pr-10 input-hover hover-lift animate-on-scroll"
                   {...register('password')}
                 />
                 <Button
@@ -165,7 +167,7 @@ const Login = () => {
 
             <Button
               type="submit"
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 hover:scale-[1.02] hover:shadow-lg"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground button-glow hover-lift animate-on-scroll"
               disabled={isLoading}
             >
               {isLoading ? 'Signing in...' : 'Sign in'}
