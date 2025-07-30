@@ -59,7 +59,11 @@ export const useAuth = () => {
   const logout = () => {
     localStorage.removeItem('hrms_token');
     localStorage.removeItem('hrms_user');
+    localStorage.removeItem('hrms_onboarding_complete');
     setUser(null);
+    
+    // Redirect to login page
+    window.location.href = '/';
   };
 
   return {

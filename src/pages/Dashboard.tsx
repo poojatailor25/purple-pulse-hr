@@ -1,6 +1,5 @@
-import { Header } from '@/components/layout/Header';
 import { AppSidebar } from '@/components/layout/AppSidebar';
-import { SidebarProvider } from '@/components/ui/sidebar';
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { MetricCard } from '@/components/widgets/MetricCard';
 import { ClockInOutCard } from '@/components/widgets/ClockInOutCard';
 import { BirthdayCarousel } from '@/components/widgets/BirthdayCarousel';
@@ -18,7 +17,10 @@ const Dashboard = () => {
         <AppSidebar />
         
         <div className="flex-1 flex flex-col">
-          <Header />
+          {/* Header with only sidebar trigger */}
+          <header className="h-12 flex items-center border-b border-border bg-card px-4">
+            <SidebarTrigger />
+          </header>
           
           <main className="flex-1 p-6 overflow-auto">
             {/* Metrics Row - Including Clock In/Out and Monthly Hours */}
