@@ -62,6 +62,10 @@ export default {
 				'toast-success-foreground': 'hsl(var(--toast-success-foreground))',
 				'toast-error': 'hsl(var(--toast-error))',
 				'toast-error-foreground': 'hsl(var(--toast-error-foreground))',
+				// Purple theme enhancements
+				'purple-glow': 'hsl(270 80% 75%)',
+				'purple-dark': 'hsl(270 80% 25%)',
+				'white-soft': 'hsl(0 0% 98%)',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -72,7 +76,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				shadow: 'hsl(var(--shadow, 220 13% 9%))'
+				shadow: 'hsl(var(--shadow, 240 20% 2%))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -81,25 +85,36 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'fade-in': {
+					'0%': { opacity: '0', transform: 'translateY(10px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				'scale-in': {
+					'0%': { transform: 'scale(0.95)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' }
+				},
+				'purple-glow': {
+					'0%, 100%': { 
+						boxShadow: '0 0 20px hsl(270 80% 65% / 0.3)' 
 					},
-					to: {
-						height: '0'
+					'50%': { 
+						boxShadow: '0 0 30px hsl(270 80% 65% / 0.5), 0 0 40px hsl(270 80% 75% / 0.3)' 
 					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.3s ease-out',
+				'scale-in': 'scale-in 0.2s ease-out',
+				'purple-glow': 'purple-glow 2s ease-in-out infinite'
 			}
 		}
 	},
