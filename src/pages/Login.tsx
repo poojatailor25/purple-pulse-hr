@@ -13,6 +13,7 @@ import { OnboardingDialog } from '@/components/OnboardingDialog';
 import { ForgotPasswordDialog } from '@/components/ForgotPasswordDialog';
 import { Eye, EyeOff, Building2 } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import AuthGuard from '@/components/AuthGuard';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -99,7 +100,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <AuthGuard requireAuth={false}>
       <div ref={scrollRef} className="min-h-screen flex items-center justify-center bg-background p-4">
         <Card className="w-full max-w-md bg-card border-border animate-fade-in hover-lift">
           <CardHeader className="text-center space-y-4">
@@ -122,9 +123,6 @@ const Login = () => {
                 className="bg-input border-border text-foreground input-hover hover-lift animate-on-scroll"
                 {...register('email')}
               />
-              {errors.email && (
-                <p className="text-sm text-destructive">{errors.email.message}</p>
-              )}
             </div>
 
             <div className="space-y-2">
@@ -160,9 +158,6 @@ const Login = () => {
                   )}
                 </Button>
               </div>
-              {errors.password && (
-                <p className="text-sm text-destructive">{errors.password.message}</p>
-              )}
             </div>
 
             <Button
@@ -192,18 +187,18 @@ const Login = () => {
           </form>
         </CardContent>
       </Card>
-    </div>
 
-    <OnboardingDialog 
-      open={showOnboarding} 
-      onComplete={handleOnboardingComplete}
-    />
-    
-    <ForgotPasswordDialog
-      open={showForgotPassword}
-      onOpenChange={setShowForgotPassword}
-    />
-  </>
+      <OnboardingDialog 
+        open={showOnboarding} 
+        onComplete={handleOnboardingComplete}
+      />
+      
+      <ForgotPasswordDialog
+        open={showForgotPassword}
+        onOpenChange={setShowForgotPassword}
+      />
+    </div>
+    </AuthGuard>
   );
 };
 
