@@ -35,7 +35,7 @@ All colors MUST be HSL.
     --destructive-foreground: 0 0% 100%;
 
     --border: 240 12% 18%;
-    --input: 240 12% 12%;
+    --input: 240 12% 18%;
     --ring: 270 80% 65%;
 
     /* HRMS specific tokens */
@@ -101,7 +101,7 @@ All colors MUST be HSL.
     --destructive-foreground: 0 0% 100%;
 
     --border: 240 12% 18%;
-    --input: 240 12% 12%;
+    --input: 240 12% 18%;
     --ring: 270 80% 65%;
     
     --sidebar-background: 240 18% 4%;
