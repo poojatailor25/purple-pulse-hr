@@ -117,6 +117,9 @@ const SignUp = () => {
                   className="bg-input border-border text-foreground input-hover hover-lift animate-on-scroll"
                   {...register('fullName')}
                 />
+                {errors.fullName && (
+                  <p className="text-sm text-destructive">{errors.fullName.message}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -128,6 +131,9 @@ const SignUp = () => {
                   className="bg-input border-border text-foreground input-hover hover-lift animate-on-scroll"
                   {...register('email')}
                 />
+                {errors.email && (
+                  <p className="text-sm text-destructive">{errors.email.message}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -152,20 +158,23 @@ const SignUp = () => {
                     ) : (
                       <Eye className="h-4 w-4" />
                     )}
-                  </Button>
-                </div>
-                <div className="text-xs text-muted-foreground space-y-1">
-                  <p>Password must contain:</p>
-                  <ul className="list-disc list-inside space-y-0.5 ml-2">
-                    <li>At least 8 characters</li>
-                    <li>One uppercase letter</li>
-                    <li>One lowercase letter</li>
-                    <li>One number</li>
-                    <li>One special character</li>
-                    <li>No spaces</li>
-                  </ul>
-                </div>
+                </Button>
               </div>
+              {errors.password && (
+                <p className="text-sm text-destructive">{errors.password.message}</p>
+              )}
+              <div className="text-xs text-muted-foreground space-y-1">
+                <p>Password must contain:</p>
+                <ul className="list-disc list-inside space-y-0.5 ml-2">
+                  <li>At least 8 characters</li>
+                  <li>One uppercase letter</li>
+                  <li>One lowercase letter</li>
+                  <li>One number</li>
+                  <li>One special character</li>
+                  <li>No spaces</li>
+                </ul>
+              </div>
+            </div>
 
               <div className="space-y-2">
                 <Label htmlFor="confirmPassword" className="text-foreground">Confirm Password *</Label>
@@ -189,9 +198,12 @@ const SignUp = () => {
                     ) : (
                       <Eye className="h-4 w-4" />
                     )}
-                  </Button>
-                </div>
+                </Button>
               </div>
+              {errors.confirmPassword && (
+                <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>
+              )}
+            </div>
 
               <Button
                 type="submit"
